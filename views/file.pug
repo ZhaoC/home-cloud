@@ -1,0 +1,15 @@
+extends layout
+
+block vars
+    //- - var bodyClass = 'front-page';
+    - var n = 0;
+    - var arr = files;
+    - var dir = title;
+
+block content
+    h1= title
+    p Welcome to #{title}
+ 
+    while n < 5   
+        a(href='/'+dir+'/'+ arr[n]) #{arr[n++]}
+        br

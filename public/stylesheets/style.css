@@ -1,0 +1,94 @@
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  margin: 0 auto 1em auto;
+  padding: 1em 2em 0;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 80em;
+}
+
+
+:link {
+  background: transparent;
+  color: #00B7FF;
+}
+
+:visited {
+  background: transparent;
+  color: #0e388c;
+}
+
+
+/* front page */
+
+body.front-page {
+  text-align: center;
+}
+
+body.front-page h1 img {
+  float: none;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+}
+
+body.front-page h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: #2a2a2af6
+}
+
+body.front-page h2 {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+body.front-page>a {
+  margin: 1em 2em;
+  border: solid thick;
+  text-align: center;
+  display: inline-block;
+  vertical-align: bottom;
+  text-decoration: none;
+}
+
+body.front-page>a>p {
+  text-decoration: none;
+  width: 18em;
+  min-height: 3em;
+  padding: 1em 1.4em;
+}
+
+body.front-page>a>p strong {
+  font-size: 1.5em;
+  font-style: normal;
+  display: block;
+  color: rgb(83, 83, 83)
+}
+
+body.front-page>a {
+  color: black;
+  background: #FFFFE0;
+  border-color: #FFFFE0
+}
+
+/* body.front-page > a + a */
+
+body.front-page>a {
+  box-shadow: 0 0 40px black;
+  transition: box-shadow 0.05s linear;
+}
+
+body.front-page>a:hover {
+  box-shadow: 0 0 25px black;
+}

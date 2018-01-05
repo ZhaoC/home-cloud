@@ -1,0 +1,14 @@
+extends layout
+
+block vars
+  - var bodyClass = 'front-page';
+
+block content
+  h1= title
+  p Welcome to #{title}
+  a(href='/photo')
+    p
+      strong Photos
+  a(href='/video')
+    p
+      strong Videos
