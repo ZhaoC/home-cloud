@@ -17,6 +17,7 @@ body {
 :link {
   background: transparent;
   color: #00B7FF;
+  text-decoration: none;
 }
 
 :visited {
@@ -65,7 +66,7 @@ body.front-page>a {
 body.front-page>a>p {
   text-decoration: none;
   width: 18em;
-  min-height: 3em;
+  min-height: 2.5em;
   padding: 1em 1.4em;
 }
 
@@ -78,8 +79,8 @@ body.front-page>a>p strong {
 
 body.front-page>a {
   color: black;
-  background: #FFFFE0;
-  border-color: #FFFFE0
+  background: rgb(110, 161, 228);
+  border-color: rgb(103, 155, 224);
 }
 
 /* body.front-page > a + a */

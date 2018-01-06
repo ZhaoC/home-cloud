@@ -7,9 +7,35 @@ block vars
     - var dir = title;
 
 block content
-    h1= title
+    h1= title 
+        b
+        a(href='/') &#x21B6;
     p Welcome to #{title}
  
-    while n < 5   
-        a(href='/'+dir+'/'+ arr[n]) #{arr[n++]}
-        br
+    if(tag === 'photo')
+        each file in files   
+            a(href='/'+dir+'/'+ file, target= '_blank')
+                img.image(src='/'+dir+'/'+ file, width="400")
+            br
+ 
+    if(tag === 'video')
+        each file in files   
+            video(width="320", height="240", controls)
+                source(src='/'+dir+'/'+ file, type="video/mp4")
+            br
+
+    if(tag === 'audio')
+        each file in files   
+            audio(preload="auto", autobuffer, controls)
+                source(src='/'+dir+'/'+ file)
+            br
+
+    if(tag === 'doc')
+        each file in files   
+            a(href='/'+dir+'/'+ file, target= '_blank') #{file}
+            br
+
+    if(tag === 'other')
+        each file in files   
+            a(href='/'+dir+'/'+ file) #{file}
+            br
