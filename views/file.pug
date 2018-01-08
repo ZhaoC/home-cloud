@@ -13,29 +13,58 @@ block content
     p Welcome to #{title}
  
     if(tag === 'photo')
+        form(enctype='multipart/form-data' , action='/upload/photo', method='post')
+            .form-group
+                input.form-control(type='file', , name='imageupload')
+                input(type='submit', name='uploadimage', value='Upload Image')
+
+        a(href='/')
+            i(class='fa fa-cloud-upload')        
+        br    
+        br
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank')
                 img.image(src='/'+dir+'/'+ file, width="400")
             br
  
     if(tag === 'video')
+        form(enctype='multipart/form-data' , action='/upload/video', method='post')
+            .form-group
+                input.form-control(type='file', , name='videoupload')
+                input(type='submit', name='uploadvideo', value='Upload Video')
+
         each file in files   
             video(width="320", height="240", controls)
                 source(src='/'+dir+'/'+ file, type="video/mp4")
             br
 
     if(tag === 'audio')
+        form(enctype='multipart/form-data' , action='/upload/audio', method='post')
+            .form-group
+                input.form-control(type='file', , name='audioupload')
+                input(type='submit', name='uploadaudio', value='Upload Audio')
+
         each file in files   
             audio(preload="auto", autobuffer, controls)
                 source(src='/'+dir+'/'+ file)
             br
 
     if(tag === 'doc')
+        form(enctype='multipart/form-data' , action='/upload/doc', method='post')
+            .form-group
+                input.form-control(type='file', , name='docupload')
+                input(type='submit', name='uploaddoc', value='Upload Doc')
+
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank') #{file}
             br
 
     if(tag === 'other')
+        form(enctype='multipart/form-data' , action='/upload/other', method='post')
+            .form-group
+                input.form-control(type='file', , name='otherupload')
+                input(type='submit', name='uploadother', value='Upload Other')
+
         each file in files   
             a(href='/'+dir+'/'+ file) #{file}
             br
