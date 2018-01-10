@@ -22,7 +22,8 @@ body {
 
 :visited {
   background: transparent;
-  color: #0e388c;
+  /* color: #0e388c; */
+  color: #00B7FF;
 }
 
 
@@ -79,8 +80,8 @@ body.front-page>a>p strong {
 
 body.front-page>a {
   color: black;
-  background: rgb(110, 161, 228);
-  border-color: rgb(103, 155, 224);
+  background: #00B7FF;
+  border-color: #00B7FF;
 }
 
 /* body.front-page > a + a */

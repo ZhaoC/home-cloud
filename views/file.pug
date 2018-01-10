@@ -2,7 +2,7 @@ extends layout
 
 block vars
     //- - var bodyClass = 'front-page';
-    - var n = 0;
+    //- - var n = 0;
     - var arr = files;
     - var dir = title;
 
@@ -15,13 +15,10 @@ block content
     if(tag === 'photo')
         form(enctype='multipart/form-data' , action='/upload/photo', method='post')
             .form-group
-                input.form-control(type='file', , name='imageupload')
-                input(type='submit', name='uploadimage', value='Upload Image')
-
-        a(href='/')
-            i(class='fa fa-cloud-upload')        
+                input.form-control(type='file', name='imageupload')
+                button(type='submit', name='uploadimage')
+                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')       
         br    
-        br
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank')
                 img.image(src='/'+dir+'/'+ file, width="400")
@@ -30,9 +27,10 @@ block content
     if(tag === 'video')
         form(enctype='multipart/form-data' , action='/upload/video', method='post')
             .form-group
-                input.form-control(type='file', , name='videoupload')
-                input(type='submit', name='uploadvideo', value='Upload Video')
-
+                input.form-control(type='file', name='videoupload')
+                button(type='submit', name='uploadvideo')
+                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+        br    
         each file in files   
             video(width="320", height="240", controls)
                 source(src='/'+dir+'/'+ file, type="video/mp4")
@@ -41,9 +39,10 @@ block content
     if(tag === 'audio')
         form(enctype='multipart/form-data' , action='/upload/audio', method='post')
             .form-group
-                input.form-control(type='file', , name='audioupload')
-                input(type='submit', name='uploadaudio', value='Upload Audio')
-
+                input.form-control(type='file', name='audioupload')
+                button(type='submit', name='uploadaudio')
+                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+        br    
         each file in files   
             audio(preload="auto", autobuffer, controls)
                 source(src='/'+dir+'/'+ file)
@@ -52,9 +51,10 @@ block content
     if(tag === 'doc')
         form(enctype='multipart/form-data' , action='/upload/doc', method='post')
             .form-group
-                input.form-control(type='file', , name='docupload')
-                input(type='submit', name='uploaddoc', value='Upload Doc')
-
+                input.form-control(type='file', name='docupload')
+                button(type='submit', name='uploaddoc')
+                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+        br
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank') #{file}
             br
@@ -62,9 +62,10 @@ block content
     if(tag === 'other')
         form(enctype='multipart/form-data' , action='/upload/other', method='post')
             .form-group
-                input.form-control(type='file', , name='otherupload')
-                input(type='submit', name='uploadother', value='Upload Other')
-
+                input.form-control(type='file', name='otherupload')
+                button(type='submit', name='uploadother')
+                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')    
+        br
         each file in files   
             a(href='/'+dir+'/'+ file) #{file}
             br
