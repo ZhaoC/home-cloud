@@ -9,63 +9,112 @@ block vars
 block content
     h1= title 
         b
-        a(href='/') &#x21B6;
+        a(href='/', class='nounderline') &#x21B6;
     p Welcome to #{title}
  
+    //- section for file upload
     if(tag === 'photo')
-        form(enctype='multipart/form-data' , action='/upload/photo', method='post')
-            .form-group
-                input.form-control(type='file', name='imageupload')
-                button(type='submit', name='uploadimage')
-                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')       
-        br    
+        - var v_action =  '/upload/photo';
+        - var v_name1 = 'imageupload';
+        - var v_name2 = 'uploadimage';
+
+    if(tag === 'video')
+        - var v_action =  '/upload/video';
+        - var v_name1 = 'videoupload';
+        - var v_name2 = 'uploadvideo';
+
+    if(tag === 'audio')
+        - var v_action =  '/upload/audio';
+        - var v_name1 = 'audioupload';
+        - var v_name2 = 'uploadaudio';
+
+    if(tag === 'doc')
+        - var v_action =  '/upload/doc';
+        - var v_name1 = 'docupload';
+        - var v_name2 = 'uploaddoc';
+    
+    if(tag === 'other')
+        - var v_action =  '/upload/other';
+        - var v_name1 = 'otherupload';
+        - var v_name2 = 'uploadother';
+
+    form(enctype='multipart/form-data' , action=v_action, method='post')
+        .form-group
+            input.form-control(type='file', name=v_name1)
+            button(type='submit', name=v_name2)
+                i(class='fa fa-cloud-upload', style='color: #00B7FF;')       
+ 
+    //- section for file display
+    if(tag === 'photo')
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank')
                 img.image(src='/'+dir+'/'+ file, width="400")
             br
- 
+
     if(tag === 'video')
-        form(enctype='multipart/form-data' , action='/upload/video', method='post')
-            .form-group
-                input.form-control(type='file', name='videoupload')
-                button(type='submit', name='uploadvideo')
-                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
-        br    
         each file in files   
             video(width="320", height="240", controls)
                 source(src='/'+dir+'/'+ file, type="video/mp4")
             br
 
     if(tag === 'audio')
-        form(enctype='multipart/form-data' , action='/upload/audio', method='post')
-            .form-group
-                input.form-control(type='file', name='audioupload')
-                button(type='submit', name='uploadaudio')
-                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
-        br    
         each file in files   
             audio(preload="auto", autobuffer, controls)
                 source(src='/'+dir+'/'+ file)
             br
 
     if(tag === 'doc')
-        form(enctype='multipart/form-data' , action='/upload/doc', method='post')
-            .form-group
-                input.form-control(type='file', name='docupload')
-                button(type='submit', name='uploaddoc')
-                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
-        br
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank') #{file}
             br
-
+    
     if(tag === 'other')
-        form(enctype='multipart/form-data' , action='/upload/other', method='post')
-            .form-group
-                input.form-control(type='file', name='otherupload')
-                button(type='submit', name='uploadother')
-                    i(class='fa fa-cloud-upload', style='color: #00B7FF;')    
-        br
         each file in files   
             a(href='/'+dir+'/'+ file) #{file}
             br
+
+    //- if(tag === 'video')
+    //-     form(enctype='multipart/form-data' , action='/upload/video', method='post')
+    //-         .form-group
+    //-             input.form-control(type='file', name='videoupload')
+    //-             button(type='submit', name='uploadvideo')
+    //-                 i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+    //-     br    
+    //-     each file in files   
+    //-         video(width="320", height="240", controls)
+    //-             source(src='/'+dir+'/'+ file, type="video/mp4")
+    //-         br
+
+    //- if(tag === 'audio')
+    //-     form(enctype='multipart/form-data' , action='/upload/audio', method='post')
+    //-         .form-group
+    //-             input.form-control(type='file', name='audioupload')
+    //-             button(type='submit', name='uploadaudio')
+    //-                 i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+    //-     br    
+    //-     each file in files   
+    //-         audio(preload="auto", autobuffer, controls)
+    //-             source(src='/'+dir+'/'+ file)
+    //-         br
+
+    //- if(tag === 'doc')
+    //-     form(enctype='multipart/form-data' , action='/upload/doc', method='post')
+    //-         .form-group
+    //-             input.form-control(type='file', name='docupload')
+    //-             button(type='submit', name='uploaddoc')
+    //-                 i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+    //-     br
+    //-     each file in files   
+    //-         a(href='/'+dir+'/'+ file, target= '_blank') #{file}
+    //-         br
+
+    //- if(tag === 'other')
+    //-     form(enctype='multipart/form-data' , action='/upload/other', method='post')
+    //-         .form-group
+    //-             input.form-control(type='file', name='otherupload')
+    //-             button(type='submit', name='uploadother')
+    //-                 i(class='fa fa-cloud-upload', style='color: #00B7FF;')    
+    //-     br
+    //-     each file in files   
+    //-         a(href='/'+dir+'/'+ file) #{file}
+    //-         br
