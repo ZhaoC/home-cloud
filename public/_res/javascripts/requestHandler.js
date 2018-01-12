@@ -1,21 +1,28 @@
-(function(window){  
+(function (window) {
     'use strict';
-    function define_library(){
-        var RequestHandler = {}; 
 
-        RequestHandler.uploadFile = function(url, formId){
+    function define_library() {
+        var RequestHandler = {};
 
-            var form = document.getElementById('myform');
+        RequestHandler.uploadFile = function (url, formId) {
+
+            var form = document.getElementById(formId);
             var formdata = new FormData(form);
 
             fetch(url, {
                 method: "POST",
                 body: formdata
+            }).then(
+                response => response.json()
+            ).then(
+                result => {
+                    console.log('Result content:', result);
+                    if(result.status === 'success'){
+                        location.reload();
+                        // let fileNameField = document.getElementById('fileName');
+                        // fileNameField.value = "";
+                    }
                 }
-            ).then(
-                response => response.text()
-            ).then(
-                result => console.log('Result content:', result)
             ).catch(
                 err => console.log('error meesage', err.messge)
             );
@@ -24,10 +31,9 @@
         return RequestHandler;
     }
 
-    if(typeof(RequestHandler) === 'undefined'){
+    if (typeof (RequestHandler) === 'undefined') {
         window.RequestHandler = define_library();
-    }
-    else{
+    } else {
         console.log("RequestHandler has already been defined.");
     }
 })(window);

@@ -11,7 +11,6 @@ function getStorage(path) {
             cb(null, 'public/' + path + '/')
         },
         filename: function (req, file, cb) {
-            console.log('file upload: '+file, file.originalname);
             cb(null, Date.now()+'-'+file.originalname)
         }
     });
@@ -37,24 +36,26 @@ var uploadOther = multer({
     storage: getStorage('Other')
 });
 
+let returnSuccess = { status: 'success'};
+
 router.post('/photo', uploadPhoto.single('fileupload'), function (req, res) {
-    res.send("File upload sucessfully.");
+    res.send(JSON.stringify(returnSuccess));
 });
 
 router.post('/audio', uploadAudio.single('fileupload'), function (req, res) {
-    res.send("File upload sucessfully.");
+    res.send(JSON.stringify(returnSuccess));
 });
 
 router.post('/video', uploadVideo.single('fileupload'), function (req, res) {
-    res.send("File upload sucessfully.");
+    res.send(JSON.stringify(returnSuccess));
 });
 
 router.post('/doc', uploadDoc.single('fileupload'), function (req, res) {
-    res.send("File upload sucessfully.");
+    res.send(JSON.stringify(returnSuccess));
 });
 
 router.post('/other', uploadOther.single('fileupload'), function (req, res) {
-    res.send("File upload sucessfully.");
+    res.send(JSON.stringify(returnSuccess));
 });
 
 module.exports = router;

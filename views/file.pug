@@ -15,64 +15,57 @@ block content
     //- section for file upload
     if(tag === 'photo')
         - var v_action =  '/upload/photo';
-        - var v_name1 = 'imageupload';
-        - var v_name2 = 'uploadimage';
+        - var v_accept =  'image/*';
 
     if(tag === 'video')
         - var v_action =  '/upload/video';
-        - var v_name1 = 'videoupload';
-        - var v_name2 = 'uploadvideo';
+        - var v_accept =  'video/*';
 
     if(tag === 'audio')
         - var v_action =  '/upload/audio';
-        - var v_name1 = 'audioupload';
-        - var v_name2 = 'uploadaudio';
+        - var v_accept =  'audio/*';
 
     if(tag === 'doc')
         - var v_action =  '/upload/doc';
-        - var v_name1 = 'docupload';
-        - var v_name2 = 'uploaddoc';
+        - var v_accept =  '.pdf, .doc, docx, .txt, .json, .xml, .md, .css, .js';
     
     if(tag === 'other')
         - var v_action =  '/upload/other';
-        - var v_name1 = 'otherupload';
-        - var v_name2 = 'uploadother';
+        - var v_accept =  '.iso, .zip, .apk, .dmg, .exe';
 
     //- form(enctype='multipart/form-data' , action=v_action, method='post')
     //-     .form-group
     //-         input.form-control(type='file', name=v_name1)
     //-         button(type='submit', name=v_name2)
-    //-             i(class='fa fa-cloud-upload', style='color: #00B7FF;')    
+    //-             i(class='fa fa-cloud-upload', style='color: #00B7FF;')  
+
     div(class='container')
-        form(class='form-group', id='myform')
-            input(type='file', name='fileupload', id='fileinput')
+        form(class='form-group', id='fileForm')
+            input(type='file', name='fileupload', id='fileInput', accept=v_accept)
             div(class='input-group col-xs-12')
-                input(type='text', class='form-control input-lg', disabled='', placeholder='Upload Content', id='file-name')
+                input(type='text', class='form-control input-lg', disabled='', placeholder='Upload Content', id='fileName')
                 span(class='input-group-btn')
-                    button(class='btn btn-primary input-lg', type='button', id='browse-btn')
+                    button(class='btn btn-primary input-lg', type='button', id='browseBtn')
                         i(class='fa fa-folder-open')
                 span(class='input-group-btn')
-                    button(class='btn btn-success input-lg', type='button', id='upload-btn', onClick='RequestHandler.uploadFile(\''+v_action+'\', \'file-form\');')
+                    button(class='btn btn-success input-lg', type='button', id='uploadBtn', onClick='RequestHandler.uploadFile(\''+v_action+'\', \'fileForm\');')
                         i(class='fa fa-cloud-upload')
     
     //- section for file display
     if(tag === 'photo')
         each file in files   
             a(href='/'+dir+'/'+ file, target= '_blank')
-                img.image(src='/'+dir+'/'+ file, width="400")
-            br
+                img.image(src='/'+dir+'/'+ file, width="400", style="margin-left:10px; margin-top:10px")
 
     if(tag === 'video')
         each file in files   
-            video(width="320", height="240", controls)
+            video(width="320", height="240", controls, style="margin-left:10px")
                 source(src='/'+dir+'/'+ file, type="video/mp4")
-            br
 
     if(tag === 'audio')
         each file in files   
             audio(preload="auto", autobuffer, controls)
                 source(src='/'+dir+'/'+ file)
-            br
 
     if(tag === 'doc')
         each file in files   

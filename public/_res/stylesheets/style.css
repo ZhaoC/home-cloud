@@ -99,7 +99,7 @@ body.front-page>a:hover {
 }
 
 /* for file upload button */
-#fileinput {
+#fileInput {
   visibility: hidden;
   position: absolute;
 }
