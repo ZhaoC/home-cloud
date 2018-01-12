@@ -11,6 +11,7 @@ function getStorage(path) {
             cb(null, 'public/' + path + '/')
         },
         filename: function (req, file, cb) {
+            console.log('file upload: '+file, file.originalname);
             cb(null, Date.now()+'-'+file.originalname)
         }
     });
@@ -36,23 +37,23 @@ var uploadOther = multer({
     storage: getStorage('Other')
 });
 
-router.post('/photo', uploadPhoto.single('imageupload'), function (req, res) {
+router.post('/photo', uploadPhoto.single('fileupload'), function (req, res) {
     res.send("File upload sucessfully.");
 });
 
-router.post('/audio', uploadAudio.single('audioupload'), function (req, res) {
+router.post('/audio', uploadAudio.single('fileupload'), function (req, res) {
     res.send("File upload sucessfully.");
 });
 
-router.post('/video', uploadVideo.single('videoupload'), function (req, res) {
+router.post('/video', uploadVideo.single('fileupload'), function (req, res) {
     res.send("File upload sucessfully.");
 });
 
-router.post('/doc', uploadDoc.single('docupload'), function (req, res) {
+router.post('/doc', uploadDoc.single('fileupload'), function (req, res) {
     res.send("File upload sucessfully.");
 });
 
-router.post('/other', uploadOther.single('otherupload'), function (req, res) {
+router.post('/other', uploadOther.single('fileupload'), function (req, res) {
     res.send("File upload sucessfully.");
 });
 
