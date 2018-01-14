@@ -8,6 +8,7 @@ var multer = require('multer');
 
 var retrieve = require('./routes/retrieve');
 var upload = require('./routes/upload');
+var requestHelper = require('./util/requestHelper')
 
 var app = express();
 
@@ -24,6 +25,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', retrieve);
+
+app.use('/upload',function (req, res, next) {
+  requestHelper.checkReuqestIP('./whitelist.json', req, res, next);
+});
+
 app.use('/upload', upload);
 
 // catch 404 and forward to error handler

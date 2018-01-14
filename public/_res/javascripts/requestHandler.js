@@ -18,8 +18,11 @@
                 result => {
                     console.log('Result content:', result);
                     if (result.status === 'success') {
-                        let toast = document.getElementById("toast");
-                        toast.className = "show"; 
+                        let toastSuccess = document.getElementById("toastSuccess");
+                        toastSuccess.className = "show"; 
+                    } else if(result.status === 'rejected'){
+                        let toastReject = document.getElementById("toastReject");
+                        toastReject.className = "show";
                     }
                 }
             ).catch(

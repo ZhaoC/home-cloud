@@ -33,7 +33,8 @@
 ### Implementation List
 - [x] Implement file sharing/stream function 
 - [x] Implement file uploading function
-- [ ] Implement file editing permission
+- [x] Implement whitelist to enable file uploading for authorized IP address
+- [ ] Implement file editing
 - [ ] Implement light-weight db for configuration data store, consider [lowdb](https://github.com/typicode/lowdb)
 - [ ] Compress preview image to increase performance
 <br/><br/><br/><br/>

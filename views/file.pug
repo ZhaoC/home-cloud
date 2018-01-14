@@ -7,11 +7,16 @@ block vars
     - var dir = title;
 
 block content
-    div(id="toast") 
+    div(id="toastSuccess") 
         div(class='btn-group' role='group')
+            button(class='btn btn-toast-ignore' onClick='hideToast(\'toastSuccess\')') Ignore
             button(class='btn') File uploaded!
-            button(class='btn btn-toast-ignore' onClick='hideToast()') Ignore
             button(class='btn btn-toast-refresh' onClick='refresh()') Refresh
+
+    div(id="toastReject")
+        div(class='btn-group' role='group')
+            button(class='btn btn-danger') Action Rejected!
+            button(class='btn btn-toast-ignore' onClick='hideToast(\'toastReject\')') Ok
 
     h1= title 
         b
@@ -62,7 +67,7 @@ block content
         if(tag === 'photo')
             each file in files   
                 a(href='/'+dir+'/'+ file, target= '_blank')
-                    img.image(src='/'+dir+'/'+ file, width="400", style="margin-left:10px; margin-top:10px")
+                    img.image(src='/'+dir+'/'+ file, width="320", style="margin-left:10px; margin-top:10px")
 
         if(tag === 'video')
             each file in files   

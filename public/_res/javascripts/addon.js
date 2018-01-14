@@ -10,7 +10,7 @@ function refresh(){
     location.reload();
 };
 
-function hideToast(){
-    let toast = document.getElementById("toast");
+function hideToast(id){
+    let toast = document.getElementById(id);
     toast.className = toast.className.replace("show", "");
 }
