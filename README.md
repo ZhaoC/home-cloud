@@ -34,8 +34,7 @@
 - [x] Implement file sharing/stream function 
 - [x] Implement file uploading function
 - [ ] Implement file editing permission
-- [ ] Implement light-weight db for configuration data store, consider [lowdb]
-(https://github.com/typicode/lowdb)
+- [ ] Implement light-weight db for configuration data store, consider [lowdb](https://github.com/typicode/lowdb)
 - [ ] Compress preview image to increase performance
 <br/><br/><br/><br/>
 Built by [@ZhaoC](https://github.com/ZhaoC) with :heart:

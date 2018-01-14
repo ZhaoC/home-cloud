@@ -17,10 +17,9 @@
             ).then(
                 result => {
                     console.log('Result content:', result);
-                    if(result.status === 'success'){
-                        location.reload();
-                        // let fileNameField = document.getElementById('fileName');
-                        // fileNameField.value = "";
+                    if (result.status === 'success') {
+                        let toast = document.getElementById("toast");
+                        toast.className = "show"; 
                     }
                 }
             ).catch(

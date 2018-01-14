@@ -6,8 +6,8 @@ var fs = require('fs');
 var photoRegExp = /\.(jpg|jpeg|png|gif)$/;
 var videoRegExp = /\.(mp4|mkv|webm)$/;
 var audioRegExp = /\.(mp3|ogg)$/;
-var docRegExp = /\.(pdf|json|xml|txt)$/;
-var otherRegExp = /\.(iso|zip|jar|rar)$/;
+var docRegExp = /\.(pdf|json|xml|txt|doc|docx|md|css|js)$/;
+var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
 
 function retrieveFiles(req, res, tag, title, regExp){
   var targetDir = path.join(__dirname + '/../public/'+ tag);
@@ -15,10 +15,10 @@ function retrieveFiles(req, res, tag, title, regExp){
     console.log(items);
     var filteredItems = [];
     for (var i = 0; i < items.length; i++) {
-      let item = items[i];
-      console.log('approved: ', item);
+      let item = items[i];      
       if(items[i].match(regExp)){
         filteredItems.push(item);
+        console.log('approved: ', item);
       }
     }
 

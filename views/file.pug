@@ -7,6 +7,12 @@ block vars
     - var dir = title;
 
 block content
+    div(id="toast") 
+        div(class='btn-group' role='group')
+            button(class='btn') File uploaded!
+            button(class='btn btn-toast' onClick='hideToast()') Ignore
+            button(class='btn btn-toast' onClick='refresh()') Refresh
+
     h1= title 
         b
         a(href='/', class='nounderline') &#x21B6;
@@ -31,7 +37,7 @@ block content
     
     if(tag === 'other')
         - var v_action =  '/upload/other';
-        - var v_accept =  '.iso, .zip, .apk, .dmg, .exe';
+        - var v_accept =  '.iso, .zip, .apk, .dmg, .exe, .rar';
 
     //- form(enctype='multipart/form-data' , action=v_action, method='post')
     //-     .form-group
@@ -52,27 +58,28 @@ block content
                         i(class='fa fa-cloud-upload')
     
     //- section for file display
-    if(tag === 'photo')
-        each file in files   
-            a(href='/'+dir+'/'+ file, target= '_blank')
-                img.image(src='/'+dir+'/'+ file, width="400", style="margin-left:10px; margin-top:10px")
+    div(id='content')
+        if(tag === 'photo')
+            each file in files   
+                a(href='/'+dir+'/'+ file, target= '_blank')
+                    img.image(src='/'+dir+'/'+ file, width="400", style="margin-left:10px; margin-top:10px")
 
-    if(tag === 'video')
-        each file in files   
-            video(width="320", height="240", controls, style="margin-left:10px")
-                source(src='/'+dir+'/'+ file, type="video/mp4")
+        if(tag === 'video')
+            each file in files   
+                video(width="320", height="240", controls, style="margin-left:10px")
+                    source(src='/'+dir+'/'+ file, type="video/mp4")
 
-    if(tag === 'audio')
-        each file in files   
-            audio(preload="auto", autobuffer, controls)
-                source(src='/'+dir+'/'+ file)
+        if(tag === 'audio')
+            each file in files   
+                audio(preload="auto", autobuffer, controls)
+                    source(src='/'+dir+'/'+ file)
 
-    if(tag === 'doc')
-        each file in files   
-            a(href='/'+dir+'/'+ file, target= '_blank') #{file}
-            br
-    
-    if(tag === 'other')
-        each file in files   
-            a(href='/'+dir+'/'+ file) #{file}
-            br
+        if(tag === 'doc')
+            each file in files   
+                a(href='/'+dir+'/'+ file, target= '_blank') #{file}
+                br
+        
+        if(tag === 'other')
+            each file in files   
+                a(href='/'+dir+'/'+ file) #{file}
+                br

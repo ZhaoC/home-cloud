@@ -130,3 +130,9 @@ body.front-page>a:hover {
 .input-group-btn{
   padding-left: 5px;
 }
+
+.btn.btn-toast{
+  background-color: rgb(110, 218, 228);
+  border-color: rgb(110, 218, 228);
+  color: #fff;
+}
