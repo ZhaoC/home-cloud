@@ -10,8 +10,8 @@ block content
     div(id="toast") 
         div(class='btn-group' role='group')
             button(class='btn') File uploaded!
-            button(class='btn btn-toast' onClick='hideToast()') Ignore
-            button(class='btn btn-toast' onClick='refresh()') Refresh
+            button(class='btn btn-toast-ignore' onClick='hideToast()') Ignore
+            button(class='btn btn-toast-refresh' onClick='refresh()') Refresh
 
     h1= title 
         b
@@ -71,7 +71,7 @@ block content
 
         if(tag === 'audio')
             each file in files   
-                audio(preload="auto", autobuffer, controls)
+                audio(preload="auto", autobuffer, controls, loop, style="margin-left:20px")
                     source(src='/'+dir+'/'+ file)
 
         if(tag === 'doc')

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var path = require('path');
+var moment = require('moment');
 
 var maxSize = 1 * 1000 * 1000;
 
@@ -11,7 +12,8 @@ function getStorage(path) {
             cb(null, 'public/' + path + '/')
         },
         filename: function (req, file, cb) {
-            cb(null, Date.now()+'-'+file.originalname)
+            // console.log('moment', moment().format("YYYYMMDDHHmmss"));
+            cb(null, moment().format("YYYYMMDDHHmmss")+'-'+file.originalname)
         }
     });
 }
