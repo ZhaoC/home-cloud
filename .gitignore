@@ -58,5 +58,8 @@ typings/
 .env
 
 # local res file
-public/
-!public/_res
+public/Photo
+public/Audio
+public/Doc
+public/Video
+public/Other

@@ -10,7 +10,7 @@ var self = module.exports = {
             var ip = self.retrieveIP(req);
 
             console.log('listArr: ', ipList);
-            if (ipList.includes(ip)) {
+            if (ipList.includes(ip) || ipList.includes('*')) {
                 ret = true;
             } else {
                 ret = false;
