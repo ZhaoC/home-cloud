@@ -6,8 +6,12 @@
 
 > For media files you captured in your travel such as sound of bird tweeting, image of sea view or video of sunrise, if you would like to keep and stream them locally, use `Home Cloud`.
 
+### Live Demo
+https://home-cloud.herokuapp.com
+> Note: File uploading will be rejected for external ip request to avoid data flooding. Please try this feature locally. You can edit the `whitelist` for trusted IP address to upload content.
+
 ### Get it Started
-> Choose one laptop as `Home Cloud` running environment then download and install Node.js through https://nodejs.org/en/. After that, download `Home Cloud` source code.
+Choose one laptop as `Home Cloud` running environment then download and install Node.js through https://nodejs.org/en/. After that, download `Home Cloud` source code.
 
 ```sh
 > cd home-cloud

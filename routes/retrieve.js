@@ -10,7 +10,8 @@ var docRegExp = /\.(pdf|json|xml|txt|doc|docx|md|css|js)$/;
 var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
 
 function retrieveFiles(req, res, tag, title, regExp){
-  var targetDir = path.join(__dirname + '/../public/'+ tag);
+  // var targetDir = path.join(__dirname + '/../public/'+ tag);
+  var targetDir = './public/'+tag+'/';
   fs.readdir(targetDir, (err, items) => {
     console.log(items);
     var filteredItems = [];
