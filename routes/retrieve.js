@@ -11,17 +11,19 @@ var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
 
 function retrieveFiles(req, res, tag, title, regExp){
   // var targetDir = path.join(__dirname + '/../public/'+ tag);
-  var targetDir = './public/'+tag+'/';
+  var targetDir = './public/'+title+'/';
   fs.readdir(targetDir, (err, items) => {
     console.log(items);
     var filteredItems = [];
-    for (var i = 0; i < items.length; i++) {
-      let item = items[i];      
-      if(items[i].match(regExp)){
-        filteredItems.push(item);
-        console.log('approved: ', item);
+    if(items !== undefined){
+      for (var i = 0; i < items.length; i++) {
+        let item = items[i];      
+        if(items[i].match(regExp)){
+          filteredItems.push(item);
+          console.log('approved: ', item);
+        }
       }
-    }
+    }   
 
     res.render('file', {
       tag: tag,
