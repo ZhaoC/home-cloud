@@ -9,7 +9,7 @@ var maxSize = 1 * 1000 * 1000;
 function getStorage(path) {
     return multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, 'public/' + path + '/')
+            cb(null, './public/' + path + '/')
         },
         filename: function (req, file, cb) {
             // console.log('moment', moment().format("YYYYMMDDHHmmss"));

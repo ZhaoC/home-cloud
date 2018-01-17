@@ -1,42 +1,54 @@
 var fs = require('fs');
+var util = require('util');
 
-var self = module.exports = {
-    checkReuqestIP: function (path, req, res, cb) {
-        fs.readFile(path, 'utf8', function (err, data) {
-            if (err) throw err;
-            var ret = false;
-            var obj = JSON.parse(data);
-            var ipList = obj.whitelist;
-            var ip = self.retrieveIP(req);
+const readFile = util.promisify(fs.readFile);
 
-            console.log('listArr: ', ipList);
-            if (ipList.includes(ip) || ipList.includes('*')) {
-                ret = true;
-            } else {
-                ret = false;
-            }
+const uploadRequestFilterMW = async(req, res, next) => {
+    try {
+        const data = await readFile('whitelist.json', 'utf8');
+        var isIPAuthorized = false,
+            obj = JSON.parse(data),
+            ipList = obj.whitelist,
+            ip = retrieveIP(req);
+        console.log('listArr: ', ipList);
 
-            console.log('ret: '+ (ret? 'true': 'false'));
-
-            if(ret){
-                cb();
-            } else{
-                var returnRejected = { status: 'rejected'};
-                // console.log('json data: '+JSON.stringify(returnRejected));
-                return res.send(JSON.stringify(returnRejected));
-            }
-        });
-    },
-
-    retrieveIP: function (req) {
-        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        if (ip.substr(0, 7) == "::ffff:") {
-            ip = ip.substr(7);
-        } else if (ip.substr(0, 3) == "::1") {
-            ip = ip.substr(3);
+        if (ipList.includes(ip) || ipList.includes('*')) {
+            isIPAuthorized = true;
+        } else {
+            isIPAuthorized = false;
         }
-        console.log('retrieveIP: '+ip);
-        return ip;
-    }
 
+        console.log('isIPAuthorized: ' + (isIPAuthorized ? 'true' : 'false'));
+
+        if (isIPAuthorized) {
+            next();
+        } else {
+            var requestRejected = {
+                status: 'rejected'
+            };
+            res.send(JSON.stringify(requestRejected));
+            return;
+        }
+    } catch (e) {
+        var requestFailed = {
+            status: 'failed'
+        };
+        res.send(JSON.stringify(requestFailed));
+    }
+};
+
+function retrieveIP(req) {
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (ip.substr(0, 7) == "::ffff:") {
+        ip = ip.substr(7);
+    } else if (ip.substr(0, 3) == "::1") {
+        ip = ip.substr(3);
+    }
+    console.log('retrieveIP: ' + ip);
+    return ip;
+}
+
+module.exports = {
+    uploadRequestFilterMW: uploadRequestFilterMW,
+    retrieveIP: retrieveIP
 };
