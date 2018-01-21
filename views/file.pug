@@ -10,12 +10,12 @@ block content
     div(id="toastSuccess") 
         div(class='btn-group' role='group')
             button(class='btn btn-toast-ignore' onClick='hideToast(\'toastSuccess\')') Ignore
-            button(class='btn') File uploaded!
+            button(class='btn', id='positiveMessage') Action ---!
             button(class='btn btn-toast-refresh' onClick='refresh()') Refresh
 
     div(id="toastReject")
         div(class='btn-group' role='group')
-            button(class='btn btn-danger') Action Rejected!
+            button(class='btn btn-danger', id='negativeMessage') Action xxx!
             button(class='btn btn-toast-ignore' onClick='hideToast(\'toastReject\')') Ok
 
     h1= title 
@@ -25,26 +25,26 @@ block content
  
     //- section for file upload
     if(tag === 'photo')
-        - var v_action =  '/upload/photo';
+        - var v_action_upload =  '/upload/photo';
         - var v_accept =  'image/*';
 
     if(tag === 'video')
-        - var v_action =  '/upload/video';
+        - var v_action_upload =  '/upload/video';
         - var v_accept =  'video/*';
 
     if(tag === 'audio')
-        - var v_action =  '/upload/audio';
+        - var v_action_upload =  '/upload/audio';
         - var v_accept =  'audio/*';
 
     if(tag === 'doc')
-        - var v_action =  '/upload/doc';
+        - var v_action_upload =  '/upload/doc';
         - var v_accept =  '.pdf, .doc, docx, .txt, .json, .xml, .md, .css, .js';
     
     if(tag === 'other')
-        - var v_action =  '/upload/other';
+        - var v_action_upload =  '/upload/other';
         - var v_accept =  '.iso, .zip, .apk, .dmg, .exe, .rar';
 
-    //- form(enctype='multipart/form-data' , action=v_action, method='post')
+    //- form(enctype='multipart/form-data' , action=v_action_upload, method='post')
     //-     .form-group
     //-         input.form-control(type='file', name=v_name1)
     //-         button(type='submit', name=v_name2)
@@ -59,15 +59,25 @@ block content
                     button(class='btn btn-primary input-lg', type='button', id='browseBtn')
                         i(class='fa fa-folder-open')
                 span(class='input-group-btn')
-                    button(class='btn btn-success input-lg', type='button', id='uploadBtn', onClick='RequestHandler.uploadFile(\''+v_action+'\', \'fileForm\');')
+                    button(class='btn btn-success input-lg', type='button', id='uploadBtn', onClick='RequestHandler.uploadFile(\''+v_action_upload+'\', \'fileForm\');')
                         i(class='fa fa-cloud-upload')
     
     //- section for file display
     div(id='content')
         if(tag === 'photo')
-            each file in files   
-                a(href='/'+dir+'/'+ file, target= '_blank')
-                    img.image(src='/'+dir+'/'+ file, width="320", style="margin-left:10px; margin-top:10px")
+            if userCanDelete
+                each file in files
+                    div(class='img-wrap', id=file)
+                        a(href='/'+dir+'/'+ file, target= '_blank')
+                            span(class='view-image', title='View Image') &loz;                       
+                        span(class='delete-image', title='Delete Image') &times;
+                        img.image(src='/'+dir+'/'+ file, width="320", style="margin-left:10px; margin-top:10px", data-id='/'+dir+'/'+ file)
+            else
+                each file in files   
+                    div(class='img-wrap', id=file)
+                        a(href='/'+dir+'/'+ file, target= '_blank')
+                            span(class='view-image', title='View Image') &loz; 
+                        img.image(src='/'+dir+'/'+ file, width="320", style="margin-left:10px; margin-top:10px")
 
         if(tag === 'video')
             each file in files   

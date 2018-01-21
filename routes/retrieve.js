@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
+var util = require('util');
+
+var requestMW = require('../util/requestMiddleware');
+const readdirAsync = util.promisify(fs.readdir);
 
 var photoRegExp = /\.(jpg|jpeg|png|gif)$/;
 var videoRegExp = /\.(mp4|mkv|webm)$/;
@@ -9,10 +13,16 @@ var audioRegExp = /\.(mp3|ogg)$/;
 var docRegExp = /\.(pdf|json|xml|txt|doc|docx|md|css|js)$/;
 var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
 
-function retrieveFiles(req, res, tag, title, regExp){
+async function retrieveFiles(req, res, tag, title, regExp){
   // var targetDir = path.join(__dirname + '/../public/'+ tag);
   var targetDir = './public/'+title+'/';
-  fs.readdir(targetDir, (err, items) => {
+
+  try{
+    //check is IP is valid
+    var userCanDelete = await requestMW.checkIPAuthorized(req, 'delete');
+    console.log(userCanDelete ? 'User can delete.' : 'User cannot delete.');
+    var items = await readdirAsync(targetDir);
+
     console.log(items);
     var filteredItems = [];
     if(items !== undefined){
@@ -28,9 +38,12 @@ function retrieveFiles(req, res, tag, title, regExp){
     res.render('file', {
       tag: tag,
       title: title,
-      files: filteredItems
+      files: filteredItems,
+      userCanDelete: userCanDelete
     });
-  });
+  } catch(e){
+    console.log(e);
+  }
 };
 
 router.get('/', function (req, res, next) {

@@ -7,9 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-var retrieve = require('./routes/retrieve');
-var upload = require('./routes/upload');
-var requestHelper = require('./util/requestHelper')
+var retrieveFile = require('./routes/retrieve');
+var uploadFile = require('./routes/upload');
+// var deleteFile = require('./routes/delete');
+var requestMW = require('./util/requestMiddleware');
 
 var app = express();
 
@@ -27,9 +28,11 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', retrieve);
+app.use('/', retrieveFile);
 
-app.use('/upload', requestHelper.uploadRequestFilterMW, upload);
+app.use('/upload', requestMW.uploadRequestFilterMW, uploadFile);
+
+app.use('/delete', requestMW.removeFileMW);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
