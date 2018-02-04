@@ -11,7 +11,8 @@ var photoRegExp = /\.(jpg|jpeg|png|gif)$/;
 var videoRegExp = /\.(mp4|mkv|webm)$/;
 var audioRegExp = /\.(mp3|ogg)$/;
 var docRegExp = /\.(pdf|json|xml|txt|doc|docx|md|css|js)$/;
-var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
+// var otherRegExp = /\.(iso|zip|jar|rar|apk|dmg|exe)$/;
+var otherRegExp = /[a-zA-Z0-9]$/;
 
 async function retrieveFiles(req, res, tag, title, regExp){
   // var targetDir = path.join(__dirname + '/../public/'+ tag);

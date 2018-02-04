@@ -38,7 +38,7 @@ Choose one laptop as `Home Cloud` running environment then download and install 
 - [x] Implement file sharing/stream function 
 - [x] Implement file uploading function
 - [x] Implement whitelist/canUpload to enable file uploading for authorized IP address
-- [ ] Implement whitelist/canDelete to enable file deleting for authorized IP address
+- [x] Implement whitelist/canDelete to enable file deleting for authorized IP address
 - [ ] Implement automatic image slider
 - [ ] Compress preview image to increase performance
 <br/><br/><br/><br/>
