@@ -40,23 +40,28 @@ var uploadOther = multer({
 
 let returnSuccess = { status: 'success'};
 
-router.post('/photo', uploadPhoto.single('fileupload'), function (req, res) {
+/** this will upload a signle file */
+// router.post('/photo', uploadPhoto.single('fileupload'), function (req, res) {
+//     res.send(JSON.stringify(returnSuccess));
+// });
+
+router.post('/photo', uploadPhoto.any(), function (req, res) {
     res.send(JSON.stringify(returnSuccess));
 });
 
-router.post('/audio', uploadAudio.single('fileupload'), function (req, res) {
+router.post('/audio', uploadAudio.any(), function (req, res) {
     res.send(JSON.stringify(returnSuccess));
 });
 
-router.post('/video', uploadVideo.single('fileupload'), function (req, res) {
+router.post('/video', uploadVideo.any(), function (req, res) {
     res.send(JSON.stringify(returnSuccess));
 });
 
-router.post('/doc', uploadDoc.single('fileupload'), function (req, res) {
+router.post('/doc', uploadDoc.any(), function (req, res) {
     res.send(JSON.stringify(returnSuccess));
 });
 
-router.post('/other', uploadOther.single('fileupload'), function (req, res) {
+router.post('/other', uploadOther.any(), function (req, res) {
     res.send(JSON.stringify(returnSuccess));
 });
 

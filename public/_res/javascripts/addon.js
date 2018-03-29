@@ -3,7 +3,16 @@ $(document).on('click', '#browseBtn', function () {
 });
 
 $(document).on('change', '#fileInput', function () {
-    $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, '')); //get rid of fakepath... in chrome
+    var fileList = $(this)[0].files; // get files from 'input' element
+    var nameList = '';
+
+    for (var i=0; i<fileList.length; i++){
+        var suffix = (i !== fileList.length-1 ? ', ' : ' ');
+        nameList += fileList[i].name.replace(/C:\\fakepath\\/i, '') + suffix;  //get rid of fakepath... in chrome
+    }
+
+    $(this).parent().find('.form-control').val(nameList);
+    // $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, '')); //get rid of fakepath... in chrome
 });
 
 function refresh() {
